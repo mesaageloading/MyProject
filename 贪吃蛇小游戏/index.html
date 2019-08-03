@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">开始</button>
+<script>
+    /*
+    * 思路
+    * 1、创建地图
+    * 2、创建食物
+    * 3、创建贪吃蛇
+    * 4、可以控制贪吃蛇的方向
+    * 5、可以吃掉食物，赢得积分
+    * 6、可以结束游戏运行
+    * */
+    /*创建地图*/
+    function Map(){
+        this.width = 800;
+        this.height=400;
+        this.position = "relative";
+        this.bgColor = "#ccc";
+        this._map = null;
+        this._idName = "map";
+    };
+    Map.prototype.init = function(){
+        this._map = document.createElement("div");
+        this._map.style.width = this.width +"px";
+        this._map.style.height = this.height +"px";
+        this._map.style.position = this.position;
+        this._map.style.backgroundColor = this.bgColor;
+        this._map.id = this._idName;
+        document.body.appendChild(this._map);
+    };
+    //创建食物
+    function Food(){
+        this.oFood = null;
+        this.width = 20;
+        this.height = 20;
+        this.position = "absolute"
+        this.bgColor  = "orange";
+        this.X = 0;
+        this.Y = 0;
+        this._map = document.getElementById("map");
+    }
+    Food.prototype.init=function(){
+        if(this.oFood === null){
+            this.oFood = document.createElement("div");
+            this.oFood.style.width = this.width + "px";
+            this.oFood.style.height = this.height +"px";
+            this.oFood.style.position = this.position;
+            this.oFood.style.backgroundColor = this.bgColor;
+            this._map.appendChild(this.oFood);
+        }
+        //创建随机数，将面板分割为40*20的面板，单位为20px，使食物随机出现
+        //向下取整floor，  random()*40的取值为(0,40) 不包含40，因为left值最大为39*20
+        this.X = Math.floor(Math.random()*40);
+        this.Y = Math.floor(Math.random()*20);
+        this.oFood.style.left = this.X*20 + "px";
+        this.oFood.style.top = this.Y*20 +"px";
+    };
+    //创建蛇
+    function Snake(food){
+        this.width = 20;
+        this.height = 20;
+        this.position = "absolute";
+        //设置方向
+        this.direct = "right";
+        this._map = document.getElementById("map");
+        //控制定时器
+        this.timer = null;
+        //统计分数
+        this.num = 0;
+        //蛇身
+        this.body = [
+            [4,2,"beige",null],
+            [3,2,"blue",null],
+            [2,2,"blue",null]
+        ]
+        //存储食物对象。因为food不是一个全局变量
+        this.food=food;
+		//控制蛇的速度
+		this.time = 100;
+    }
+    Snake.prototype.run = function(){
+        this.show();
+        // this.move();
+        var that = this;
+        this.timer=setInterval(function(){that.move();},that.time);
+        document.onkeydown = function(ev){
+            var ev= ev|| window.event;
+            that.setDirect(ev.keyCode);
+
+        }
+
+    };
+    //创建贪吃蛇
+    Snake.prototype.show = function(){
+        for(var i = 0 ; i<this.body.length;i++){
+            if(this.body[i][3]===null){
+                this.body[i][3] = document.createElement("div");
+                this.body[i][3].style.width = this.width + "px";
+                this.body[i][3].style.height = this.height +"px";
+                this.body[i][3].style.position = this.position;
+                this.body[i][3].style.backgroundColor = this.body[i][2];
+                this._map.appendChild(this.body[i][3]);
+            }
+            this.body[i][3].style.left = this.body[i][0]*20 + "px";
+            this.body[i][3].style.top = this.body[i][1]*20 +"px";
+        }
+        this.body[0][3].style.borderRadius = this.width + "px";
+    };
+    //贪吃蛇移动
+    Snake.prototype.move = function(){
+        var len = this.body.length;
+        for(var i = len-1 ; i>0;i--){
+            this.body[i][0] = this.body[i-1][0];
+            this.body[i][1] = this.body[i-1][1];
+        }
+        //判断移动方向
+        switch(this.direct){
+            case "left":
+                this.body[0][0] -=1;
+                break;
+            case "right":
+                this.body[0][0] +=1;
+                break;
+            case "up":
+                this.body[0][1] -=1;
+                break;
+            case "down":
+                this.body[0][1] +=1;
+                break;
+        }
+        //判断是否吃了食物
+        if(this.body[0][0] === this.food.X && this.body[0][1] === this.food.Y){
+            //加长蛇身
+            var bodylen = this.body.length;
+            var lastX = this.body[bodylen-1][0];
+            var lastY = this.body[bodylen-1][1];
+            this.body.push([lastX,lastY,"blue",null]);
+            this.food.init();
+            this.num++;
+            document.title = this.num;
+        }
+        //判断游戏是否结束
+        if(this.body[0][0]<0 || this.body[0][1]<0 ||this.body[0][1]>19||this.body[0][0]>39){
+            alert("你个垃圾这都能死");
+            clearInterval(this.timer);
+            return false;
+        }
+        this.show();
+    };
+    //设置方向
+    Snake.prototype.setDirect =function(keyCode){
+        //下 40  上 38 左37 右39
+        //避免贪吃蛇回头
+        if(keyCode===40 && this.direct === "up"){ return false}else if(keyCode === 38 && this.direct === "down"){return false}else if(keyCode === 37 && this.direct === "right"){return false}else if(keyCode === 39 && this.direct === "left"){return false};
+        //监听键盘事件设置蛇的走向
+        switch(keyCode){
+            case 40:
+                this.direct = "down";
+                break;
+            case 38:
+               this.direct = "up";
+               break;
+            case 37:
+                this.direct = "left";
+                break;
+            case 39:
+                this.direct = "right";
+                break;
+        }
+
+    };
+    var oBtn = document.getElementById("btn");
+    oBtn.onclick = function(){
+        var map = new Map();
+        map.init();
+        var food = new Food();
+        food.init();
+        var snake = new Snake(food);
+        snake.run();
+    };
+
+</script>
+</body>
+</html>

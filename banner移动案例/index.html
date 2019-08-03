@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        .swiper-container{
+            width:100%;
+            max-height:600px;
+            position: relative;
+            border:5px solid black;
+        }
+        .swiper-side {
+            width:100%;
+            display: none;
+        }
+        .page-btn-group{
+            position: absolute;
+            bottom:10px;
+            right:20px;
+        }
+        .page-btn-group span{
+            /*span为行内元素 需要转换为行内块状元素才能设置宽高*/
+            display: inline-block;
+            border-radius: 10px;
+            width:10px;
+            height:10px;
+            background-color: white;
+        }
+        .page-btn-group .btn-swich{
+            width:25px;
+            background-color: #cf010e;
+        }
+    </style>
+
+</head>
+<body>
+<div class="swiper-container">
+    <div class="swiper-side"style="display: block" >
+        <a href="#"><img src="img/banner1.jpg" alt=""></a>
+    </div>
+    <div class="swiper-side">
+        <a href="#"><img src="img/banner2.jpg" alt=""></a>
+    </div>
+    <div class="swiper-side">
+        <a href="#"><img src="img/banner3.jpg" alt=""></a>
+    </div>
+    <div class="swiper-side">
+        <a href="#"><img src="img/banner4.jpg" alt=""></a>
+    </div>
+    <div class="page-btn-group">
+        <span class="btn-swich"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+<!--    面向过程的形式实现图片轮播效果-->
+    <script>
+        // var oSwiperContainer = document.getElementsByClassName("swiper-container")[0];
+        // var aSwiperSide = oSwiperContainer.getElementsByClassName("swiper-side");
+        // var oPage = document.getElementsByClassName("page-btn-group")[0];
+        // var aSpan = oPage.getElementsByTagName("span");
+        // var nowindex = 0;
+        // var timer = 0;
+        // autoplay();
+        // //自动播放
+        // function autoplay(){
+        //     timer = setInterval(function(){
+        //         nowindex ++;
+        //         nowindex = nowindex % aSwiperSide.length;
+        //         changeTab(nowindex);
+        //     },1000)
+        // }
+        // //切换图片方法
+        // function changeTab(nowindex){
+        //     for(var i= 0;i<aSwiperSide.length;i++){
+        //         aSwiperSide[i].style.display = "none";
+        //         aSpan[i].style.width = "10px";
+        //         aSpan[i].style.backgroundColor = "white";
+        //     }
+        //     aSwiperSide[nowindex].style.display = "block";
+        //     aSpan[nowindex].style.width = "25px";
+        //     aSpan[nowindex].style.backgroundColor = "#cf010e";
+        // }
+        // //鼠标移入停止播放
+        // oSwiperContainer.onmouseover = function(){
+        //     clearInterval(timer);
+        // }
+        // //鼠标移出继续播放
+        // oSwiperContainer.onmouseout =function(){
+        //     autoplay();
+        // }
+        // //鼠标点击span切换图片
+        // for(var i = 0 ;i<aSpan.length;i++){
+        //     aSpan[i].index = i;
+        //     aSpan[i].onclick = function(){
+        //         changeTab(this.index);
+        //         nowindex = this.index;
+        //     }
+        // }
+    </script>
+
+<!--    面向对象的形式实现图片轮播效果-->
+    <script>
+        function Swiper(){
+            this.oSwiperContainer = document.getElementsByClassName("swiper-container")[0];
+            this.aSwiperSide = this.oSwiperContainer.getElementsByClassName("swiper-side");
+            this.oPage = document.getElementsByClassName("page-btn-group")[0];
+            this.aSpan = this.oPage.getElementsByTagName("span");
+            this.nowindex = 0;
+            this.timer = 0;
+        }
+        //初始化函数
+        Swiper.prototype.init=function(){
+            this.autoplay();
+            var that = this;
+            this.oSwiperContainer.onmouseover = function(){
+                clearInterval(that.timer);
+            };
+            //鼠标移出继续播放
+            this.oSwiperContainer.onmouseout =function(){
+                that.autoplay();
+            };
+            for(var i = 0 ;i<this.aSpan.length;i++){
+                this.aSpan[i].index = i;
+                this.aSpan[i].onclick = function(){
+                    that.changeTab(this.index);
+                    that.nowindex = this.index;
+                }
+            }
+        };
+        //自动播放
+        Swiper.prototype.autoplay= function(){
+            let that = this;
+            this.timer = setInterval(function(){
+                that.nowindex ++;
+                that.nowindex = that.nowindex % that.aSwiperSide.length;
+                that.changeTab(that.nowindex);
+            },1000)
+        };
+        //切换图片方法
+        Swiper.prototype.changeTab = function(nowindex){
+            for(var i= 0;i<this.aSwiperSide.length;i++){
+                this.aSwiperSide[i].style.display = "none";
+                this.aSpan[i].style.width = "10px";
+                this.aSpan[i].style.backgroundColor = "white";
+            }
+            this.aSwiperSide[nowindex].style.display = "block";
+            this.aSpan[nowindex].style.width = "25px";
+            this.aSpan[nowindex].style.backgroundColor = "#cf010e";
+        }
+        //鼠标移入停止播放
+        Swiper.prototype.stop = function(){
+
+        }
+        //鼠标点击span切换图片
+        var d1 = new Swiper();
+        d1.init();
+    </script>
+</div>
+</body>
+</html>

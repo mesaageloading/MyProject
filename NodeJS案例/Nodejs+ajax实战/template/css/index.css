@@ -1,0 +1,45 @@
+body{
+    background: url("../images/bg1.jpg") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.container{
+    margin:auto;
+
+}
+.row{
+    height: 30px;
+}
+.form-group{
+    margin-top: 20px;
+}
+.form-group label{
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+#login{
+    margin: 100px auto;
+    width: 300px;
+
+}
+#login .title{
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    text-align: center;
+    background-color: #2e6da4;
+}
+.content{
+    width: 100%;
+    background-color: white;
+    border: 1px solid white;
+}
+.content input{
+    width: 160px;
+}
+.btn-wrap{
+    text-align: center;
+    margin-bottom: 20px;
+}
+

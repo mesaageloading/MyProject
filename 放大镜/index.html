@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:300px;
+            height:300px;
+            position: relative;
+            left:20px;
+            top:10px;
+            border:1px solid #ccc;
+        }
+        #box img{
+            width:300px;
+            height:300px;
+        }
+        #box span{
+            width:150px;
+            height:150px;
+            position: absolute;
+            left:0;
+            top:0;
+            background-color: rgba(255,255,0,0.5);
+            display: none;
+        }
+        #box2{
+            width:400px;
+            height:400px;
+            background-color: 1px solid #ccc;
+            position: absolute;
+            left:380px;
+            top:10px;
+            overflow: hidden;
+            display: none;
+        }
+        #box2 img{
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="img/450X450.jpg" alt="">
+    <span id="backdrop"></span>
+</div>
+<div id="box2">
+    <img src="img/800X800.jpg" alt="" id="bigImg">
+</div>
+<!--面向过程的放大镜效果-->
+<script>
+    // var oBox1 = document.getElementById("box");
+    // var oBackdrop = document.getElementById("backdrop");
+    // var oBox2 = document.getElementById("box2");
+    // var obigImg =document.getElementById("bigImg");
+    // oBox1.onmouseover = function(){
+    //     oBackdrop.style.display = "block";
+    //     oBox2.style.display = "block";
+    //
+    // };
+    // oBox1.onmousemove = function(ev){
+    //     var ev = ev|| window.event;
+    //     let left = ev.clientX - this.offsetLeft - oBackdrop.offsetWidth/2;
+    //     let top = ev.clientY - this.offsetTop - oBackdrop.offsetHeight/2;
+    //     //限制移动范围
+    //     if(left<=0){left =0}
+    //     if(top<=0){top=0}
+    //     if(left>(oBox1.offsetWidth-oBackdrop.offsetWidth)){ left =(oBox1.offsetWidth-oBackdrop.offsetWidth) }
+    //     if(top>(oBox1.offsetHeight-oBackdrop.offsetHeight)){top=(oBox1.offsetHeight-oBackdrop.offsetHeight)};
+    //     oBackdrop.style.left = left +"px";
+    //     oBackdrop.style.top = top +"px";
+    //     //socX/socY 为遮罩移动的百分比，  大图片的宽高-盒子宽高=最大移动距离。
+    //     //最大移动距离乘以百分比。就等于图片移动距离
+    //     let socX =  left/(oBackdrop.offsetWidth-oBox1.offsetWidth);
+    //     let socY =  top/(oBackdrop.offsetHeight-oBox1.offsetHeight);
+    //     obigImg.style.left = -socX * (oBox2.offsetWidth-obigImg.offsetWidth) + "px";
+    //     obigImg.style.top = -socY * (oBox2.offsetHeight-obigImg.offsetHeight) + "px";
+    //
+    // }
+    // oBox1.onmouseout = function(){
+    //     oBackdrop.style.display = "none";
+    //     oBox2.style.display = "none";
+    //
+    // }
+</script>
+
+<!--面向对象的放大镜效果-->
+<script>
+    function big(){
+        this.oBox1 = document.getElementById("box");
+        this.oBackdrop = document.getElementById("backdrop");
+        this.oBox2 = document.getElementById("box2");
+        this.obigImg =document.getElementById("bigImg");
+
+    }
+    //初始化函数
+    big.prototype.init =function(){
+        let that = this;
+        this.oBox1.onmouseover = function(){
+            that.fnOver();
+        };
+        this.oBox1.onmousemove = function(ev){
+            that.fnMove(ev);
+        };
+        this.oBox1.onmouseout = function(){
+            that.fnOut();
+        };
+    };
+    //当鼠标点击
+    big.prototype.fnOver = function(){
+        this.oBackdrop.style.display = "block";
+        this.oBox2.style.display = "block";
+    };
+    big.prototype.fnMove = function(ev){
+        var ev = ev|| window.event;
+        let left = ev.clientX - this.oBox1.offsetLeft - this.oBackdrop.offsetWidth/2;
+        let top = ev.clientY - this.oBox1.offsetTop - this.oBackdrop.offsetHeight/2;
+        //限制移动范围
+        if(left<=0){left =0}
+        if(top<=0){top=0}
+        if(left>(this.oBox1.offsetWidth-this.oBackdrop.offsetWidth)){ left =(this.oBox1.offsetWidth-this.oBackdrop.offsetWidth) }
+        if(top>(this.oBox1.offsetHeight-this.oBackdrop.offsetHeight)){top=(this.oBox1.offsetHeight-this.oBackdrop.offsetHeight)};
+        this.oBackdrop.style.left = left +"px";
+        this.oBackdrop.style.top = top +"px";
+        //socX/socY 为遮罩移动的百分比，  大图片的宽高-盒子宽高=最大移动距离。
+        //最大移动距离乘以百分比。就等于图片移动距离
+        let socX =  left/(this.oBackdrop.offsetWidth-this.oBox1.offsetWidth);
+        let socY =  top/(this.oBackdrop.offsetHeight-this.oBox1.offsetHeight);
+        this.obigImg.style.left = -socX * (this.oBox2.offsetWidth-this.obigImg.offsetWidth) + "px";
+        this.obigImg.style.top = -socY * (this.oBox2.offsetHeight-this.obigImg.offsetHeight) + "px";
+
+    };
+    big.prototype.fnOut = function(){
+        this.oBackdrop.style.display = "none";
+        this.oBox2.style.display = "none";
+    };
+    var d1 = new big();
+    d1.init();
+    // var oBox1 = document.getElementById("box");
+    // var oBackdrop = document.getElementById("backdrop");
+    // var oBox2 = document.getElementById("box2");
+    // var obigImg =document.getElementById("bigImg");
+
+</script>
+</body>
+</html>

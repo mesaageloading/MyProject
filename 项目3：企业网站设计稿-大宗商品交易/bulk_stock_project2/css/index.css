@@ -1,0 +1,274 @@
+.container{
+    width: 1000px;
+}
+.header .header-top{
+    border-bottom: 1px solid #e5e5e5;
+    height: 28px;
+    line-height: 28px;
+}
+.header-top-cont{
+    font-size:12px;
+    color: #a1a1a1;
+}
+.header-top-cont span{
+    color:#da0000;
+}
+.header-top-cont .top-right{
+    text-align: right;
+
+}
+.header-top-cont .top-right a{
+    color:#a1a1a1;
+}
+/* logo-nav部分 */
+.logo img{
+    margin-top: 11px;
+}
+.nav{
+    margin:0;
+    padding-left :179px;
+}
+.nav a{
+    font-size:16px;
+    font-weight: bold;
+    padding:22px 18px;
+    display: inline-block;
+    margin-left:-6px;
+    margin-top:15px;
+}
+.nav .active{
+    border-bottom:5px solid red;
+}
+/* banner */
+.banner img,.feature{
+    width: 100%;    
+}
+/* 服务模块 */
+.service{
+	height:200px;
+	text-align: center;
+	border-bottom:1px solid #ddd;
+}
+.service .col-md-3{
+	border-right:1px solid #ddd;
+	height:72px;
+	text-align: center;
+	padding:0;
+	margin-top:61px;
+}
+.service p{
+	font-size:20px;
+	color:#ddd;
+}
+.service span{
+	font-weight: bold;
+	font-size: 30px;
+	color:#e10202;
+}
+.service span,.service p{
+	margin-top:0px;
+}
+/* 公告收益模块 */
+.notice{
+	height:438px;
+}
+.notice .col-md-8{
+	height:348px;
+	width:700px;
+	border:1px solid #ddd;
+	margin-top:44px;
+	padding:0;
+}
+.notice .notice-title{
+	text-align: center;
+	font-size:17px;
+	margin-top:40px;
+}
+.notice .notice-title span{
+	font-weight: bold;
+	color:#d80c08;
+
+}
+.notice .notice-num{
+	margin-top:52px;
+	margin-left:39px;
+}
+.notice .notice-num .notice-num-touzi{
+	border-right:1px solid #ddd;
+}
+.notice .notice-num .notice-num-touzi p ,.notice .notice-num .notice-num-shouyi p{
+	margin-top:0;
+	font-size: 14px;
+	color:#c2c2c2;
+	margin-left:39px;
+}
+.notice .notice-num .notice-num-touzi span,.notice .notice-num .notice-num-shouyi span{
+	font-size:30px;
+	color:#da0000;
+	font-weight: bold;
+}
+.notice .notice-num .notice-num-touzi,.notice .notice-num .notice-num-shouyi{
+	display: inline-block;
+	height:71px;
+	width: 296px;
+}
+.notice .notice-btn{
+	height:110px;
+	text-align: center;
+	line-height: 110px;
+	margin-top:58px;
+	border-top:1px solid #ddd;
+}
+.notice .notice-btn button{
+	border:1px solid #d80100;
+	height:47px;
+	width: 162px;
+	border-radius: 20px;
+	margin:0;
+}
+.notice .notice-btn .btn1{
+	background-color: #d80100;
+	color:#fff;
+	margin:10px;
+}
+.notice .notice-btn .btn2{
+	background-color: #fff;
+	color:#d80100;
+	margin:26px;
+}
+
+.notice .col-md-4 {
+	width: 279px;
+	margin-top:44px;
+}
+.notice .col-md-4 .panel{
+	width: 279px;
+	height: 348px;
+}
+.notice .col-md-4 .panel-heading{
+	height:55px;
+	line-height: 55px;
+		
+}
+.notice .col-md-4 .panel-heading span{
+	font-size:20px;
+	margin-left:20px;
+}
+.notice .col-md-4 .panel-heading a{
+	font-size: 14px;
+	color:#b3b3b3;
+	margin-left:164px;
+}
+.notice .col-md-4 .panel-body ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	margin-top:5px;
+}
+.notice .col-md-4 .panel-body li{
+	line-height: 30px;
+
+}
+.notice .col-md-4 .panel-body li a{
+	font-size: 12px;
+	color:#7f7f7f;
+}
+/*特色模块*/
+.feature{
+	background: url(../img/bg.png);
+	width: 100%;
+	height: 500px;
+	border:1px solid transparent;
+}
+.feature h1{
+	text-align: center;
+	color: #fff;
+	margin-top: 92px;
+}
+.feature .row div{
+	text-align: center;
+	margin-top: 70px;
+}
+.feature .row div p{
+	color: #ebb0b0;
+	font-size: 18px;
+	margin-top: 30px;
+}
+
+
+/*footer 底部区域*/
+.footer{
+	height: 372px;
+	background: #f2f2f2;
+}
+
+.footer .footer-nav p{
+	margin-top: 48px;
+	font-size: 16px;
+	color: #a6a6a6;
+}
+.footer .footer-nav ul{
+	padding: 0;
+	margin: 0;
+}
+.footer .footer-nav li{
+	list-style: none;
+	margin-top: 20px;
+	font-size: 12px;
+	color: #999;
+}
+.footer .phone{
+	padding-left: 100px;
+}
+.footer .phone p:nth-of-type(1){
+	margin-top: 48px;
+	font-size: 16px;
+	color: #a6a6a6;
+}
+.footer .phone p:nth-of-type(2){
+	color: #a72323;
+	margin-top: 14px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+.footer .phone p:nth-of-type(3){
+	color: #999;
+	margin-top: 14px;
+	font-size: 12px;
+}
+.footer .phone a{
+	display: inline-block;
+	height: 68px;
+	width: 46px;
+	padding-top: 46px;
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+}
+.footer .phone a:nth-of-type(1){
+	background: url(../img/icon-wechat.png) no-repeat;
+}
+.footer .phone a:nth-of-type(2){
+	background: url(../img/icon-qq.png) no-repeat;
+	margin-left: 26px;
+}
+.footer .nav-wraper{
+	height: 260px;
+	border-bottom: 1px solid #ddd;
+}
+
+.footer .link{
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+}
+.footer .link p:nth-of-type(1){
+	margin-top: 36px;
+}
+.footer .link p:nth-of-type(2){
+	margin-top: 20px;
+}
+.footer .link a{
+	color: #999;
+}

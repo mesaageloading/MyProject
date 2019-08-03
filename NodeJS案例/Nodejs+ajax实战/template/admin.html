@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/simplecss.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/ajax.js"></script>
+</head>
+<body>
+<div class="nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <a href="/admin">螺钉后台管理系统</a>
+                <a href="" class="btn btn-success" id="add-btn">添加用户</a>
+            </div>
+            <div class="col-md-2"><a href="/logout">退出系统</a></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered" id="table">
+                <tr>
+                    <th>客户编号</th>
+                    <th>姓名</th>
+                    <th>邮箱</th>
+                    <th>电话</th>
+                    <th>QQ</th>
+                    <th>操作</th>
+                </tr>
+                <!--<tr>-->
+                    <!--<td>1</td>-->
+                    <!--<td>张三</td>-->
+                    <!--<td>1@qq.com</td>-->
+                    <!--<td>135999888899</td>-->
+                    <!--<td>2014868983</td>-->
+                    <!--<td>-->
+<!--                        <a href="" class="btn btn-primary">修改</a>-->
+<!--                        <a href="" class="btn btn-danger">删除</a>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            </table>
+        </div>
+    </div>
+</div>
+<!--添加用户panel-->
+<div class="panel panel-default" id="adduser">
+    <div class="panel-heading">
+        <div class="panel-title">添加用户</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">姓名</div>
+            <div class="col-md-8"><input type="text" id="username"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">邮箱</div>
+            <div class="col-md-8"><input type="text" id="email"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">电话</div>
+            <div class="col-md-8"><input type="text" id="phone"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">QQ</div>
+            <div class="col-md-8"><input type="text" id="qq"></div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" id="save-btn">保存</button>
+        <button class="btn btn-primary" id="cancel-btn">取消</button>
+    </div>
+</div>
+
+<!--编辑用户 panel-->
+<div class="panel panel-default" id="editUser">
+    <div class="panel-heading">
+        <div class="panel-title">编辑用户信息</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">姓名</div>
+            <div class="col-md-8"><input type="text" id="edit-username"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">邮箱</div>
+            <div class="col-md-8"><input type="text" id="edit-email"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">电话</div>
+            <div class="col-md-8"><input type="text" id="edit-phone"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">QQ</div>
+            <div class="col-md-8">
+                <input type="text" id="edit-qq">
+                <input type="hidden" id="edit-id">
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" id="edit-save-btn">保存</button>
+        <button class="btn btn-primary" id="edit-cancel-btn">取消</button>
+    </div>
+</div>
+
+<script>
+    var oTable = document.getElementById('table');
+    //获取数据库数据
+    ajax({
+        method : 'GET',
+        url : '/list',
+        success : function(result){
+            // console.log(result);
+            for(var i =0 ; i<result.data.length;i++){
+                // console.log(result.data[i]);
+                var oTr = document.createElement('tr');
+                var obj = result.data[i];
+                for(item in obj) {
+                    // console.log(obj[item]);
+                    var oTd = document.createElement('td');
+                    oTd.innerHTML = obj[item];
+                    oTr.appendChild(oTd);
+                }
+                // console.log(oTr);
+                var caozuo = document.createElement('td');
+                caozuo.innerHTML = '<button class="btn btn-primary">修改</button>\n' +
+                    '<button class="btn btn-danger">删除</button>';
+                oTr.appendChild(caozuo);
+                oTable.appendChild(oTr);
+
+            }
+        }
+    })
+    var addBtn = document.getElementById('add-btn');
+    var addUser = document.getElementById('adduser');
+    //点击添加用户按钮时
+    addBtn.onclick = function(){
+        addUser.style.display = 'block';
+        var left = document.documentElement.clientWidth/2 - addUser.offsetWidth/2;
+        var top = document.documentElement.clientHeight/2 - addUser.offsetHeight/2;
+        console.log(left,top);
+        addUser.style.left = left + 'px';
+        addUser.style.top = top + 'px';
+        return false;
+
+    }
+    //点击取消隐藏注册窗口
+    var cancelBtn = document.getElementById('cancel-btn');
+    cancelBtn.onclick = function(){
+        addUser.style.display = 'none';
+    }
+    //添加用户完成时
+    var saveBtn = document.getElementById('save-btn');
+    saveBtn.onclick = function(){
+
+        var oUser = document.getElementById('username');
+        var oEmail = document.getElementById('email');
+        var oPhone = document.getElementById('phone');
+        var oQQ = document.getElementById('qq');
+        ajax({
+            method : 'POST',
+            url : '/adduser',
+            data:'username='+oUser.value + '&email=' + oEmail.value + '&phone=' + oPhone.value + '&qq=' + oQQ.value,
+            success:function(result){
+                if(result.status === 0){
+                    alert(result.message);
+                    window.location.reload();//刷新当前页面
+                }else{
+                    alert(result.message);
+                }
+            }
+        })
+
+    }
+
+    oTable.onclick = function(ev){
+        var ev = ev || event;
+        var aTd = ev.target.parentNode.parentNode.children;
+        var oEdit = document.getElementById('editUser');
+        // console.log(ev.target);
+        if(ev.target.innerHTML === '修改'){
+            oEdit.style.display = 'block';
+            oEdit.style.left = document.documentElement.clientWidth / 2 - oEdit.offsetWidth / 2 +'px';
+            oEdit.style.top = document.documentElement.clientHeight / 2 - oEdit.offsetHeight / 2 +'px';
+            //默认显示数值
+
+            // console.log(aTd);
+            var edit_username = document.getElementById('edit-username');
+            var edit_email = document.getElementById('edit-email');
+            var edit_phone = document.getElementById('edit-phone');
+            var edit_qq = document.getElementById('edit-qq');
+            var edit_id = document.getElementById('edit-id');
+
+            edit_username.value = aTd[1].innerHTML;
+            edit_email.value = aTd[2].innerHTML;
+            edit_phone.value = aTd[3].innerHTML;
+            edit_qq.value = aTd[4].innerHTML;
+
+            //保存按钮
+            var oEdit_saveBtn = document.getElementById('edit-save-btn');
+            oEdit_saveBtn.onclick = function(){
+                ajax({
+                    method : 'post',
+                    url : '/change',
+                    data: 'id='+aTd[0].innerHTML+'&username='+ edit_username.value + '&email='+edit_email.value+'&phone='+edit_phone.value + '&qq='+edit_qq.value,
+                    success:function(result){
+                        alert(result.message);
+                        window.location.reload();
+                    }
+                })
+            };
+
+        }
+        if(ev.target.innerHTML === '删除'){
+            ajax({
+                method : 'POST',
+                url : '/delete',
+                data: 'id='+aTd[0].innerHTML,
+                success:function(result){
+                    alert(result.message);
+                    window.location.reload();
+
+                }
+            })
+        }
+
+        //关闭隐藏按钮
+        var oEdit_btn = document.getElementById('edit-cancel-btn');
+        oEdit_btn.onclick = function(){
+            oEdit.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

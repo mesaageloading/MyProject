@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/simplecss.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/ajax.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="login">
+            <div class="title">欢迎注册Nodeing会员</div>
+            <form action="">
+                <div class="content">
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label for="">用户名:</label>
+                        </div>
+                        <div class="col-md-8"><input type="text" id="username" name="username"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label for="">密码:</label>
+                        </div>
+                        <div class="col-md-8"><input type="password" id="password" name="password"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label for="">确认密码:</label>
+                        </div>
+                        <div class="col-md-8"><input type="password" id="repassword" name="repassword"></div>
+                    </div>
+                    <div class="row form-group btn-wrap">
+                        <button id="reg" type="button" class="btn btn-danger">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        //收集用户信息
+        var oBtn = document.getElementById("reg");
+        var oUser = document.getElementById("username");
+        var oPassword = document.getElementById("password");
+        var oRePassword = document.getElementById("repassword");
+
+        oBtn.onclick = function(){
+            ajax({
+                method : "post",
+                url : '/register',
+                data:"username="+oUser.value+"&password="+oPassword.value+"&repassword="+oRePassword.value,
+                success: function(result){
+                    if(result.status === 2){
+                        alert(result.message);
+                        window.location.href = "/login.html"
+                    }else{
+                        alert(result.message);
+                    }
+
+                }
+            });
+
+        }
+
+    </script>
+</body>
+</html>
