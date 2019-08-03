@@ -1,0 +1,238 @@
+/*css样式重置：html元素默认会有一些样式，可能会影响我们布局*/
+/*公共的样式*/
+body, p, ul, li, input{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+/*浮动*/
+.pull-left{
+	float: left;
+}
+.pull-right{
+	float: right;
+}
+.clearfix{
+   *zoom: 1;
+}
+.clearfix::after{
+      content:".";
+      display:block;
+      height:0;
+      visibility:hidden;
+      clear:both;
+} 
+/*头部内容*/
+.header{
+	height: 60px;
+	border-bottom:1px solid #dcdcdc;
+	/*如果去拖动缩放浏览器窗口的大小 header宽度是会发生变化的，变化范围是>=960*/
+	/*最小宽度：如果浏览器小于960px 就会出现滚动条 header的最小的宽度都是960px
+	 * */
+	min-width: 960px;
+}
+.header-left{
+	height: 60px;
+	width: 300px;
+	margin-left: 10px;
+}
+/* 空格 后代选择器 ，多元素选择器*/
+.header-left a, .header-left span{
+	/*让a连接和span里面的文字消失，通过背景图片来显示*/
+	text-indent: -9999px;
+	display: inline-block;
+}
+.header-left a{
+	width: 170px;
+	height: 44px;
+	/*把所有的小图标放到一个图片上的目的：性能优化 减少请求次数*/
+	background: url(../img/download-all.gif) no-repeat;
+    background-position: -644px 0px;
+    margin-top: 10px;
+}
+.header-left span{
+	height: 38px;
+	width: 86px;
+	background: url(../img/download-all.gif) no-repeat;
+	background-position: -691px -47px;
+}
+
+.header-right{
+	
+	width: 300px;
+	margin-right: 10px;
+	font-size: 12px;
+	margin-top: 38px;
+	color: #2974b6;
+}
+.header-right a{
+	color: #2974b6 ;
+}
+.header-right .first-a{
+	color: #f8645c;
+}
+
+/*download-menu部分*/
+.download-menu{
+	width: 978px;
+	/*让盒子居中*/
+	margin: 0 auto;
+}
+.download-menu span{
+	text-indent: -999px;
+	display: block;
+}
+.tab-menu li{
+	width: 161px;
+	height: 93px;
+	float: left;
+	
+	
+}
+.tab-menu li a{
+	display: block;
+	width:161px ;
+	margin-top: 30px;
+	height: 40px;
+	background: url(../img/download-all.gif) no-repeat;
+}
+/*能够选中tab-menu下所有li中的第一个li*/
+.tab-menu li:nth-of-type(1) a{
+	background-position: 8px -129px;
+}
+.tab-menu li:nth-of-type(1) a:hover{
+	background-position: 8px -185px;
+}
+.tab-menu li:nth-of-type(2) a{
+	background-position: -160px -129px;
+}
+.tab-menu li:nth-of-type(2) a:hover{
+	background-position: -160px -185px;
+}
+.tab-menu li:nth-of-type(3) a{
+	background-position: -340px -129px;
+}
+.tab-menu li:nth-of-type(3) a:hover{
+	background-position: -340px -185px;
+}
+.tab-menu li:nth-of-type(4) a{
+	background-position: -492px -129px;
+}
+.tab-menu li:nth-of-type(4) a:hover{
+	background-position: -492px -185px;
+}
+.tab-menu li:nth-of-type(5) a{
+	background-position: -626px -129px;
+}
+.tab-menu li:nth-of-type(5) a:hover{
+	background-position: -626px -185px;
+}
+.tab-menu li:nth-of-type(6) a{
+	background-position: -790px -185px;
+}
+
+/*对应平台的信息*/
+.download-info{
+	height: 439px;
+	width: 100%;
+	background: url(../img/download_bg.png) repeat-x;
+}
+.download-info-content{
+	width: 960px;
+	height: 439px;
+	background: url(../img/mac.jpg) no-repeat 0 0;
+	margin: 0 auto;
+	position: relative;
+}
+.download-info-text{
+	width: 275px;
+	height: 146px;
+	position: absolute;
+	top:197px;
+	left: 589px ;
+}
+.download-info-text p{
+	color: white;
+	font-size: 12px;
+	line-height: 22px;
+}
+.download-info-text a{
+	display: block;
+	width: 187px;
+	height: 59px;
+	text-indent: -999px;
+	margin-top: 10px;
+	background: url(../img/download-all.gif) no-repeat -694px -294px;
+}
+/*下载方式部分*/
+.download-method{
+	/*设置下边框*/
+	border: 1px solid #CCCCCC;
+	/*margin-bottom: 20px;*/
+}
+.download-method-content{
+	width: 960px;
+	margin: 0 auto;
+	height: 200px;
+}
+.download-method-left input, .download-method-left img, .download-method-left button{
+	/*垂直居中对齐*/
+	vertical-align: middle;
+	height: 32px;
+	margin-top: 20px;
+}
+.download-method-left .text-title, .download-method-right .code-left-title{
+	font-size: 20px;
+	margin-top: 50px;
+}
+.download-method-left .phone{
+	width: 190px;
+}
+.download-method-left .check_code{
+	margin-left: 12px;
+}
+.download-method-left .btn{
+	width: 100px;
+	background-color: #5197ff;
+	border: none;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+}
+
+.download-method-right{
+	/*width: 300px;*/
+}
+.download-method-right p{
+	font-size: 12px;
+}
+.download-method-right .code-left{
+	width: 160px;
+	margin-left: 56px;
+}
+.download-method-right .code-left-title{
+	margin-bottom: 20px;
+}
+.code-right img{
+	margin-top: 50px;
+	margin-left: 40px;
+}
+
+/*底部版权*/
+.footer{
+	text-align: center;
+	font-size: 12px;
+	/*会出现margin塌陷*/
+	margin-top: 46px;
+	margin-bottom: 10px;
+}
+.footer a{
+	font-size: 12px;
+	color: #666;
+	
+}

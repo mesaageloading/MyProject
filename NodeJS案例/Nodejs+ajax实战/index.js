@@ -74,7 +74,7 @@ var app = http.createServer(function(req,res){
         req.on('end',function(err){
             if(!err){
                 var login_str = querystring.parse(login_obj);
-                var sql = "SELECT * FROM admin WHERE username='"+login_str.username+"' AND password='"+login_str.password+"'";
+                var sql = "SELECT * FROM admin WHERE username='"+login_str.user"name+"' AND password='+login_str.password+"'";
                 console.log(sql);
                 connection.query(sql,function(error,result) {
 
