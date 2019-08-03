@@ -1,0 +1,223 @@
+/* 公共样式 */
+body,p,li,ul,input{
+    margin:0;
+    padding:0;
+}
+li{
+    list-style:none;
+}
+a{
+    text-decoration: none;
+}
+/* 浮动 */
+.pull-left{
+    float:left;
+}
+.pull-right{
+    float: right;
+}
+.clearfix{
+    *zoom: 1;
+}
+.clearfix::after{
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+/* 头部内容 */
+.header{
+    height:60px;
+    border-bottom:1px solid #dcdcdc;
+    min-width: 960px;
+
+}
+.header-left{
+    height:60px;
+    width:300px;
+    margin-left: 10px;
+}
+.header-left a,.header-left span{
+    text-indent:-9999px;
+    display: inline-block;
+    margin-top:8px;
+}
+.header-left a{
+    height:44px;
+    width:170px;
+    background: url(../img/download-all.gif) no-repeat;
+    background-position:-634px 0px;
+}
+.header-left span{
+    height:38px;
+    width:86px;
+    background: url(../img/download-all.gif) no-repeat;
+    background-position:-690px -49px;
+}
+.header-right{
+    width:300px;
+    font-size: 12px;
+    margin-top:35px;
+    margin-right:18px;
+
+}
+.header-right a{
+    color:#2974b6;
+}
+.header-right .first-a{
+    color:red;
+}
+.download-menu{
+    width:978px;
+    margin:0 auto;
+    background-color: #fafafa;
+}
+.download-menu li{
+    height:93px;
+    width:161px;
+    float:left;
+}
+.download-menu span{
+    display: inline-block;
+    text-indent: -9999px;
+}
+.download-menu li a{
+    display:block;
+    width:161px;
+    height:40px;
+    margin-top:40px;
+    background: url(../img/download-all.gif) no-repeat;
+}
+.download-menu li:nth-of-type(1) a{
+    background-position: 8px -129px;
+}
+.download-menu li:nth-of-type(1) a:hover{
+    background-position: 8px -185px;
+}
+.download-menu li:nth-of-type(2) a{
+    background-position: -175px -129px;
+}
+.download-menu li:nth-of-type(2) a:hover{
+    background-position: -175px -185px;
+}
+.download-menu li:nth-of-type(3) a{
+    background-position: -344px -129px;
+}
+.download-menu li:nth-of-type(3) a:hover{
+    background-position: -344px -185px;
+}
+.download-menu li:nth-of-type(4) a{
+    background-position: -495px -129px;
+}
+.download-menu li:nth-of-type(4) a:hover{
+    background-position: -495px -185px;
+}
+.download-menu li:nth-of-type(5) a{
+    background-position: -620px -129px;
+}
+.download-menu li:nth-of-type(5) a:hover{
+    background-position: -620px -185px;
+}
+.download-menu li:nth-of-type(6) a{
+    background-position: -750px -185px;
+}
+/* .download-menu li:nth-of-type(6) a:hover{
+    background-position: -750px -185px;
+} */
+
+
+/* 下载信息 */
+.download-info{
+    height:439px;
+    width:100%;
+    background:url(../img/download_bg.png) repeat-x;
+}
+.download-info-content{
+    width:960px;
+    height:439px;
+    background: url(../img/mac.jpg) no-repeat 0 0;
+    margin: 0 auto;
+    position: relative;
+}
+.download-info-text{
+    width:275px;
+    height:146px;
+    position: absolute;
+    color:white;
+    font-size: 14px;
+	top:197px;
+	left: 589px ;
+    line-height: 25px;
+}
+
+.download-info-text a{
+    display: block;
+    width:187px;
+    height:59px;
+    margin-top:16px;
+    text-indent: -9999px;
+    background: url(../img/download-all.gif) no-repeat -694px -294px;
+}
+.download-method{
+    border:1px solid #cccccc;
+
+}
+.download-method-content{
+    width: 960px;
+    height:200px;
+    margin: 0px auto;
+    
+}
+
+
+.download-method-left .method-title,.download-method-right .code-left-title{
+    font-size:20px;
+    margin-top:50px;
+    font-weight: bold;
+}
+.download-method-right p{
+    font-size:12px;
+}
+.download-method-left input{
+    height:32px;
+    margin-top:20px;
+}
+#phone{
+    width:190px;
+}
+#yanzhengma{
+    width:112px;
+}
+.download-method-left input,.download-method-left button,.download-method-left img{
+    vertical-align: middle;
+}
+.btn{
+    width: 100px;
+    height:40px;
+    background-color: #5197ff;
+    border: none;
+    font-size:14px;
+    font-weight:bold;
+    color:white;
+
+}
+.code-left p{
+    width:160px;
+}
+.download-method-right .code-left-title{
+    margin-bottom: 20px;
+}
+.code-right{
+    margin-top: 40px;
+    margin-left:16px;
+}
+.footer{
+    font-size: 12px;
+    text-align: center;
+    margin-top:26px;
+}
+.footer a{
+    color:#666;
+}
